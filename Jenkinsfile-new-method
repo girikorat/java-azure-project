@@ -1,0 +1,40 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('clone the repo') {
+            steps {
+            git 'https://github.com/Kumarbgm16/java-azure-project.git'
+            }
+        }
+     stage('build the project') {
+            steps {
+            sh 'mvn clean package'
+            }
+        }
+    stage('create the docker image') {
+            steps {
+            sh 'sudo docker build -t learndevops16/webappdemob49:latest .'
+            }
+        }
+                stage('docker push ') {
+     steps {
+     withCredentials([string(credentialsId: 'DOCKER_HUB_PWD', variable: 'DOCKER_HUB_PASS_CODE')])  {
+    // some block
+        sh "sudo docker login -u learndevops16 -p $DOCKER_HUB_PASS_CODE"
+        }
+        sh "sudo docker push learndevops16/webappdemob49:latest"
+        }
+        } 
+     stage('Deploy webAPP in kube Env') {
+    steps {
+  
+     sh "kubectl apply -f /var/lib/jenkins/workspace/final-project/k8-dep-svc.yml"   
+  
+}
+}    
+        
+        
+    }
+    
+}
