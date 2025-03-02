@@ -28,6 +28,7 @@ pipeline {
         } 
      stage('Deploy webAPP in kube Env') {
     steps {
+sh "sudo wget https://raw.githubusercontent.com/Kumarbgm16/java-azure-project/master/k8-dep-svc.yml" 
   
      sh "kubectl apply -f /var/lib/jenkins/workspace/final-project/k8-dep-svc.yml"   
   
