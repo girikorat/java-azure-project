@@ -1,16 +1,17 @@
 pipeline {
-     agent { label 'java' }
+    agent any
 
     stages {
         stage('git clone') {
             steps {
-              git 'https://github.com/Kumarbgm16/java-azure-project.git'
+                git 'https://github.com/Kumarbgm16/java-azure-project.git'
             }
         }
-        stage('build') {
+        stage('maven project package') {
             steps {
-              sh "mvn clean package"
+                sh 'mvn clean package'
             }
         }
+      
     }
 }
