@@ -1,4 +1,4 @@
  docker build -t app:v1 .
 ......
 giri
-sne
+snel
