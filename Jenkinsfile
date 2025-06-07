@@ -1,6 +1,5 @@
 pipeline {
-     agent { label 'java' } 
-    
+    agent { label 'java' }
     stages {
         stage('git clone') {
             steps {
